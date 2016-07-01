@@ -66,11 +66,11 @@
 		5A8F8B971D25E61E000EE402 /* pokedex-by-socialfeed */ = {
 			isa = PBXGroup;
 			children = (
+				5A8F8BB61D261959000EE402 /* Util */,
+				5A8F8BB51D2618D4000EE402 /* Resources */,
 				5A8F8BAE1D25ECFC000EE402 /* Model */,
 				5A8F8BAD1D25ECF1000EE402 /* View */,
 				5A8F8BAC1D25ECEA000EE402 /* Controller */,
-				5A8F8BB61D261959000EE402 /* Util */,
-				5A8F8BB51D2618D4000EE402 /* Resources */,
 				5A8F8B981D25E61E000EE402 /* AppDelegate.swift */,
 				5A8F8B9C1D25E61E000EE402 /* Main.storyboard */,
 				5A8F8B9F1D25E61E000EE402 /* Assets.xcassets */,
