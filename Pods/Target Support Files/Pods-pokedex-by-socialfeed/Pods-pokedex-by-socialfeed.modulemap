@@ -1,0 +1,6 @@
+framework module Pods_pokedex_by_socialfeed {
+  umbrella header "Pods-pokedex-by-socialfeed-umbrella.h"
+
+  export *
+  module * { export * }
+}

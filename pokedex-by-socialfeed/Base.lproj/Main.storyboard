@@ -398,7 +398,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="backBtn" destination="OUn-SA-RCE" id="EpD-lH-8uI"/>
                         <outlet property="baseAttackLbl" destination="Wuh-63-w7t" id="WmJ-rf-V3T"/>
                         <outlet property="currentEvoImg" destination="bVy-MP-yya" id="nJo-hv-W4A"/>
                         <outlet property="defenseLbl" destination="idY-Mr-xVQ" id="eWu-vE-bnO"/>

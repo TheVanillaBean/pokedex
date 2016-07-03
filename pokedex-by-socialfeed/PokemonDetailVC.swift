@@ -28,6 +28,14 @@ class PokemonDetailVC: UIViewController {
     
     override func viewDidLoad() {
         
+        nameLbl.text = pokemon.name
+        mainImg.image = UIImage(named: "\(pokemon.pokedexId)")
+        
+        pokemon.downloadPokemonDetails { () -> () in
+            
+            
+            
+        }
         
     }
     

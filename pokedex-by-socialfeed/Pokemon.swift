@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class Pokemon {
 
@@ -19,6 +20,7 @@ class Pokemon {
     private var _weight: String!
     private var _attack: String!
     private var _nextEvolutionTxt: String!
+    private var _pokemonURL: String!
 
     var name: String {
         return _name
@@ -28,7 +30,7 @@ class Pokemon {
         return _pokedexId
     }
     
-    var description: String {
+    var pokemonDescription: String {
         return _description
     }
     
@@ -56,17 +58,100 @@ class Pokemon {
         return _nextEvolutionTxt
     }
     
-    init(name: String, pokedexId: Int, desc: String, type: String, defense: String, height: String, weight: String, attack: String, nextEvo: String){
+    init(name: String, pokedexId: Int){
         self._name = name
         self._pokedexId = pokedexId
-        self._description = desc
-        self._type = type
-        self._defense = defense
-        self._height = height
-        self._weight = weight
-        self._attack = attack
-        self._nextEvolutionTxt = nextEvo
+//        self._description = desc
+//        self._type = type
+//        self._defense = defense
+//        self._height = height
+//        self._weight = weight
+//        self._attack = attack
+//        self._nextEvolutionTxt = nextEvo
+        
+        _pokemonURL = "\(Constants.BASE_URL)\(Constants.URL_POKEMON)\(self.pokedexId)/"
 
     }
+    
+    
+    func downloadPokemonDetails(completed: Constants.DownloadComplete) {
+        
+        let url = NSURL(string: _pokemonURL)!
+        
+        Alamofire.request(.GET, url).responseJSON { response in
+            
+            let result = response.result
+            
+            if let dict = result.value as? Dictionary<String, AnyObject> {
+            
+                if let weight = dict["weight"] as? String {
+                
+                    self._weight = weight
+                    
+                }
+                
+                if let height = dict["height"] as? String {
+                    
+                    self._height = height
+                    
+                }
+                
+                if let attack = dict["attack"] as? Int {
+                
+                    self._attack = String(attack)
+                    
+                }
+                
+                if let defense = dict["defense"] as? Int {
+                    
+                    self._defense = String(defense)
+                    
+                }
+                
+             
+                print(self._weight)
+                print(self._height)
+                print(self._attack)
+                print(self._defense)
+
+                
+                if let types = dict["types"] as? [Dictionary<String, String>] where types.count > 0 {
+                    
+                    if let name = types[0]["name"] {
+                        self._type = name
+                    }
+                    
+                    if types.count > 1 {
+                    
+                        for iterator in 1 ..< types.count {
+                        
+                            if let name = types[iterator]["name"]{
+                            
+                                self._type! += "/\(name)"
+                                
+                            }
+                        
+                        }
+                    }
+                    
+                    
+                    
+                }else {
+                    
+                    self._type = ""
+                    
+                }
+                
+                
+                print(self._type)
+
+                
+            }
+            
+        }
+        
+    }
+    
+    
     
 }
