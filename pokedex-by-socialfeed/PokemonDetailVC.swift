@@ -29,14 +29,42 @@ class PokemonDetailVC: UIViewController {
     override func viewDidLoad() {
         
         nameLbl.text = pokemon.name
-        mainImg.image = UIImage(named: "\(pokemon.pokedexId)")
+        let img = UIImage(named: "\(pokemon.pokedexId)")
+        mainImg.image = img
+        currentEvoImg.image = img
+        
         
         pokemon.downloadPokemonDetails { () -> () in
+            //Called after download is finished
             
-            
+            self.updateUI()
             
         }
         
+    }
+    
+    func updateUI(){
+        
+        descLbl.text = pokemon.pokemonDescription
+        typeLbl.text = pokemon.type
+        defenseLbl.text = pokemon.defense
+        heightLbl.text = pokemon.height
+        weightLbl.text = pokemon.weight
+        baseAttackLbl.text = pokemon.attack
+        pokedexLbl.text = String(pokemon.pokedexId)
+        
+        if pokemon.nextEvolutionID == "" {
+            evoLbl.text = "No Evolutions"
+            nextEvoImg.hidden = true
+        }else{
+            nextEvoImg.hidden = false
+            nextEvoImg.image = UIImage(named: pokemon.nextEvolutionID)
+            var str = "Next Evolution: \(pokemon.nextEvolutionTxt)"
+            
+            if pokemon.nextEvolutionLvl != "" {
+                str +=  " - LVL \(pokemon.nextEvolutionLvl)"
+            }
+        }
     }
     
     @IBAction func backBtnPressed(sender: AnyObject) {
